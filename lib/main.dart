@@ -38,123 +38,149 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Container(
-            color: Colors.white70,
-            child: Column(
-              children: [
-                Container(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 60,
-                        height: 60,
-                        margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(
-                                  'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg'),
-                            )),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Orest Shemeliuk",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              "Open for new Opportunities",
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
-                            ),
-                            Text(
-                              "10h",
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 0,
-                    horizontal: 10,
-                  ),
-                  child: Text(
-                    "When you market on Linkedin, you reach customers who "
-                    "are ready to do business whenerer the happen",
-                    style: TextStyle(fontFamily: "SourceSansPro"),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  child: Image(
-                    image: NetworkImage(
-                      'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
+      body: LinkedinPostWidget(
+          "Orest Shemeliuk",
+          "Open for new Opportunities",
+          "When you market on Linkedin, you reach customers who "
+              "are ready to do business whenerer the happen",
+          'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
+          'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg'),
+    );
+  }
+}
+
+class LinkedinPostWidget extends StatelessWidget {
+  final String _userName;
+  final String _userStatus;
+  final String _userText;
+  final String _userAvatar;
+  final String _userPostImage;
+
+  const LinkedinPostWidget(
+    this._userName,
+    this._userStatus,
+    this._userText,
+    this._userAvatar,
+    this._userPostImage, {
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          color: Colors.white70,
+          child: Column(
+            children: [
+              Container(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(_userAvatar),
+                          )),
                     ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        "assets/images/heart.svg",
-                        width: 15,
-                        height: 15,
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _userName,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
+                            _userStatus,
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Text(
+                            "10h",
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
                       ),
-                      Container(
-                        padding: EdgeInsets.only(
-                          left: 3,
-                        ),
-                        child: Text(
-                          "2",
-                        ),
-                      )
-                    ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: 0,
+                  horizontal: 10,
+                ),
+                child: Text(
+                  _userText,
+                  style: TextStyle(fontFamily: "SourceSansPro"),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: Image(
+                  image: NetworkImage(
+                    _userPostImage,
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                  child: Divider(
-                    color: Colors.grey,
-                    height: 10,
-                    thickness: 1,
-                  ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 10),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      "assets/images/heart.svg",
+                      width: 15,
+                      height: 15,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: 3,
+                      ),
+                      child: Text(
+                        "2",
+                      ),
+                    )
+                  ],
                 ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      BottomButton("Like", "like"),
-                      BottomButton("Comment", "message"),
-                      BottomButton("Share", "share"),
-                      BottomButton("Send", "send"),
-                    ],
-                  ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                child: Divider(
+                  color: Colors.grey,
+                  height: 10,
+                  thickness: 1,
                 ),
-              ],
-            ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    BottomButton("Like", "like"),
+                    BottomButton("Comment", "message"),
+                    BottomButton("Share", "share"),
+                    BottomButton("Send", "send"),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
