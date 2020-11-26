@@ -1,6 +1,7 @@
 import 'dart:developer';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(MyApp());
@@ -95,7 +96,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     horizontal: 10,
                   ),
                   child: Text(
-                      "When you market on Linkedin, you reach customers who are ready to do business whenerer the happen"),
+                    "When you market on Linkedin, you reach customers who "
+                    "are ready to do business whenerer the happen",
+                    style: TextStyle(fontFamily: "SourceSansPro"),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -128,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                   child: Divider(
-                    color: Colors.red,
+                    color: Colors.grey,
                     height: 10,
                     thickness: 1,
                   ),
@@ -178,7 +182,10 @@ class BottomButton extends StatelessWidget {
         ),
         Text(
           _iconName,
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: "SourceSansPro",
+          ),
         ),
       ],
     );
