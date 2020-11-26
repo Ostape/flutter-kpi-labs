@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -109,12 +109,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   margin: EdgeInsets.only(left: 10),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.poll,
-                        size: 20,
+                      SvgPicture.asset(
+                        "assets/images/heart.svg",
+                        width: 15,
+                        height: 15,
                       ),
-                      Text(
-                        "2",
+                      Container(
+                        padding: EdgeInsets.only(
+                          left: 3,
+                        ),
+                        child: Text(
+                          "2",
+                        ),
                       )
                     ],
                   ),
@@ -133,10 +139,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      BottomButton("Like", Icons.ac_unit),
-                      BottomButton("Comment", Icons.poll),
-                      BottomButton("Share", Icons.poll),
-                      BottomButton("Send", Icons.poll),
+                      BottomButton("Like", "like"),
+                      BottomButton("Comment", "message"),
+                      BottomButton("Share", "share"),
+                      BottomButton("Send", "send"),
                     ],
                   ),
                 ),
@@ -151,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class BottomButton extends StatelessWidget {
   final String _iconName;
-  final IconData _iconData;
+  final String _iconData;
 
   const BottomButton(this._iconName, this._iconData, {Key key})
       : super(key: key);
@@ -161,7 +167,11 @@ class BottomButton extends StatelessWidget {
     return Column(
       children: [
         GestureDetector(
-          child: Icon(_iconData),
+          child: SvgPicture.asset(
+            "assets/images/$_iconData.svg",
+            width: 20,
+            height: 20,
+          ),
           onTap: () {
             log("assss");
           },
