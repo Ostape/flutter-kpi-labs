@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/Post.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
@@ -31,6 +32,61 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Post> posts = [
+    Post(
+      userName: "Orest Shemeliuk",
+      userStatus: "Open for new Opportunities",
+      userText: "When you market on Linkedin, you reach customers who "
+          "are ready to do business whenerer the happen",
+      userAvatar:
+          'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
+      userPostImage:
+          'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
+    ),
+    Post(
+      userName: "Andrii Vasyliabs",
+      userStatus: "Open for new Opportunities",
+      userText: "Winter holidays are coming, hurry up to apply for our open"
+          " positions and moonshot your career in 2021 with the industry leader in BI",
+      userAvatar:
+          'https://i.kinja-img.com/gawker-media/image/upload/t_original/ijsi5fzb1nbkbhxa2gc1.png',
+      userPostImage:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/80-391-9007_Kyiv_DSC_5895.jpg/250px-80-391-9007_Kyiv_DSC_5895.jpg',
+    ),
+    Post(
+      userName: "Andrii Vasyliabs",
+      userStatus: "Open for new Opportunities",
+      userText: "Winter holidays are coming, hurry up to apply for our open"
+          " positions and moonshot your career in 2021 with the industry leader in BI",
+      userAvatar:
+      'https://www.news4jax.com/resizer/b89RYEm5oAgzxJxWIGoyLJ9lZu8=/960x960/smart/filters:format(jpeg):strip_exif(true):strip_icc(true):no_upscale(true):quality(65)/'
+          'cloudfront-us-east-1.images.arcpublishing.com/gmg/X462YQ4HIJEGHHX2I3LXRV4G7A.jpg',
+      userPostImage:
+      'https://cdn.statcdn.com/Infographic/images/normal/19728.jpeg',
+    ),
+    Post(
+      userName: "Andrii Vasyliabs",
+      userStatus: "Open for new Opportunities",
+      userText: "Winter holidays are coming, hurry up to apply for our open"
+          " positions and moonshot your career in 2021 with the industry leader in BI",
+      userAvatar:
+      'https://lh3.googleusercontent.com/proxy/LLz6mu3T-x3hnkslpViePSLatOND_lIrZHGd6fnG6A'
+          'sc_YwL0fFHJdDJvJVAuJSHCk27YJBJznEUY4OseVX2hnu5iXdhOfv6Uf2nnSRZy8mYCyUsJY2LcQ',
+      userPostImage:
+      'https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/d2/06/e1/little-beautiful-church.jpg',
+    ),
+    Post(
+      userName: "Andrii Vasyliabs",
+      userStatus: "Open for new Opportunities",
+      userText: "Winter holidays are coming, hurry up to apply for our open"
+          " positions and moonshot your career in 2021 with the industry leader in BI",
+      userAvatar:
+      'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
+      userPostImage:
+      'https://cdn.the-scientist.com/assets/articleNo/66864/aImg/35078/foresttb-m.jpg',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,30 +94,26 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         centerTitle: true,
       ),
-      body: LinkedinPostWidget(
-          "Orest Shemeliuk",
-          "Open for new Opportunities",
-          "When you market on Linkedin, you reach customers who "
-              "are ready to do business whenerer the happen",
-          'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
-          'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg'),
+      body: ListView.separated(
+        itemCount: posts.length,
+        separatorBuilder: (_, index) => Divider(
+          color: Colors.grey[300],
+          thickness: 15,
+        ),
+        physics: BouncingScrollPhysics(),
+        itemBuilder: (_, index) => LinkedinPostWidget(
+          post: posts[index],
+        ),
+      ),
     );
   }
 }
 
 class LinkedinPostWidget extends StatelessWidget {
-  final String _userName;
-  final String _userStatus;
-  final String _userText;
-  final String _userAvatar;
-  final String _userPostImage;
+  final Post post;
 
-  const LinkedinPostWidget(
-    this._userName,
-    this._userStatus,
-    this._userText,
-    this._userAvatar,
-    this._userPostImage, {
+  const LinkedinPostWidget({
+    this.post,
     Key key,
   }) : super(key: key);
 
@@ -85,7 +137,7 @@ class LinkedinPostWidget extends StatelessWidget {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: NetworkImage(_userAvatar),
+                            image: NetworkImage(post.userAvatar),
                           )),
                     ),
                     Container(
@@ -94,14 +146,14 @@ class LinkedinPostWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            _userName,
+                            post.userName,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
                           Text(
-                            _userStatus,
+                            post.userStatus,
                             style: TextStyle(
                               color: Colors.grey,
                             ),
@@ -124,7 +176,7 @@ class LinkedinPostWidget extends StatelessWidget {
                   horizontal: 10,
                 ),
                 child: Text(
-                  _userText,
+                  post.userText,
                   style: TextStyle(fontFamily: "SourceSansPro"),
                 ),
               ),
@@ -132,7 +184,7 @@ class LinkedinPostWidget extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: Image(
                   image: NetworkImage(
-                    _userPostImage,
+                    post.userPostImage,
                   ),
                 ),
               ),
