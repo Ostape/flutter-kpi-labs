@@ -1,9 +1,7 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/Post.dart';
 import 'package:flutter_app/view/LinkedinPostWidget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Post> posts = [
+  static List<Post> posts = [
     Post(
       userName: "Orest Shemeliuk",
       userStatus: "Open for new Opportunities",
@@ -91,8 +89,16 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
 
   final tabs = [
-    Center(
-      child: Text("Home"),
+    ListView.separated(
+      itemCount: posts.length,
+      separatorBuilder: (_, index) => Divider(
+        color: Colors.grey[300],
+        thickness: 15,
+      ),
+      physics: BouncingScrollPhysics(),
+      itemBuilder: (_, index) => LinkedinPostWidget(
+        post: posts[index],
+      ),
     ),
     Center(
       child: Text("My Network"),
@@ -107,19 +113,6 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Text("Jobs"),
     ),
   ];
-
-  //
-  // ListView.separated(
-  // itemCount: posts.length,
-  // separatorBuilder: (_, index) => Divider(
-  // color: Colors.grey[300],
-  // thickness: 15,
-  // ),
-  // physics: BouncingScrollPhysics(),
-  // itemBuilder: (_, index) => LinkedinPostWidget(
-  // post: posts[index],
-  // ),
-  // ),
 
   @override
   Widget build(BuildContext context) {
