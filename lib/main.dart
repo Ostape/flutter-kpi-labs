@@ -60,10 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
       userText: "Winter holidays are coming, hurry up to apply for our open"
           " positions and moonshot your career in 2021 with the industry leader in BI",
       userAvatar:
-      'https://www.news4jax.com/resizer/b89RYEm5oAgzxJxWIGoyLJ9lZu8=/960x960/smart/filters:format(jpeg):strip_exif(true):strip_icc(true):no_upscale(true):quality(65)/'
+          'https://www.news4jax.com/resizer/b89RYEm5oAgzxJxWIGoyLJ9lZu8=/960x960/smart/filters:format(jpeg):strip_exif(true):strip_icc(true):no_upscale(true):quality(65)/'
           'cloudfront-us-east-1.images.arcpublishing.com/gmg/X462YQ4HIJEGHHX2I3LXRV4G7A.jpg',
       userPostImage:
-      'https://cdn.statcdn.com/Infographic/images/normal/19728.jpeg',
+          'https://cdn.statcdn.com/Infographic/images/normal/19728.jpeg',
     ),
     Post(
       userName: "Andrii Vasyliabs",
@@ -71,10 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
       userText: "Winter holidays are coming, hurry up to apply for our open"
           " positions and moonshot your career in 2021 with the industry leader in BI",
       userAvatar:
-      'https://lh3.googleusercontent.com/proxy/LLz6mu3T-x3hnkslpViePSLatOND_lIrZHGd6fnG6A'
+          'https://lh3.googleusercontent.com/proxy/LLz6mu3T-x3hnkslpViePSLatOND_lIrZHGd6fnG6A'
           'sc_YwL0fFHJdDJvJVAuJSHCk27YJBJznEUY4OseVX2hnu5iXdhOfv6Uf2nnSRZy8mYCyUsJY2LcQ',
       userPostImage:
-      'https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/d2/06/e1/little-beautiful-church.jpg',
+          'https://media-cdn.tripadvisor.com/media/photo-m/1280/1a/d2/06/e1/little-beautiful-church.jpg',
     ),
     Post(
       userName: "Andrii Vasyliabs",
@@ -82,11 +82,44 @@ class _MyHomePageState extends State<MyHomePage> {
       userText: "Winter holidays are coming, hurry up to apply for our open"
           " positions and moonshot your career in 2021 with the industry leader in BI",
       userAvatar:
-      'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
+          'https://www.gettyimages.com/gi-resources/images/500px/983794168.jpg',
       userPostImage:
-      'https://cdn.the-scientist.com/assets/articleNo/66864/aImg/35078/foresttb-m.jpg',
+          'https://cdn.the-scientist.com/assets/articleNo/66864/aImg/35078/foresttb-m.jpg',
     ),
   ];
+
+  int _currentIndex = 0;
+
+  final tabs = [
+    Center(
+      child: Text("Home"),
+    ),
+    Center(
+      child: Text("My Network"),
+    ),
+    Center(
+      child: Text("Post"),
+    ),
+    Center(
+      child: Text("Notifications"),
+    ),
+    Center(
+      child: Text("Jobs"),
+    ),
+  ];
+
+  //
+  // ListView.separated(
+  // itemCount: posts.length,
+  // separatorBuilder: (_, index) => Divider(
+  // color: Colors.grey[300],
+  // thickness: 15,
+  // ),
+  // physics: BouncingScrollPhysics(),
+  // itemBuilder: (_, index) => LinkedinPostWidget(
+  // post: posts[index],
+  // ),
+  // ),
 
   @override
   Widget build(BuildContext context) {
@@ -95,18 +128,51 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         centerTitle: true,
       ),
-      body: ListView.separated(
-        itemCount: posts.length,
-        separatorBuilder: (_, index) => Divider(
-          color: Colors.grey[300],
-          thickness: 15,
+      body: tabs[_currentIndex],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black,
+            ),
+          ],
         ),
-        physics: BouncingScrollPhysics(),
-        itemBuilder: (_, index) => LinkedinPostWidget(
-          post: posts[index],
+        child: BottomNavigationBar(
+          currentIndex: _currentIndex,
+          type: BottomNavigationBarType.fixed,
+          selectedFontSize: 10,
+          unselectedFontSize: 10,
+          selectedItemColor: Colors.black,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.people_outlined),
+              label: "My Network",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_box_rounded),
+              label: "Post",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.notifications),
+              label: "Notifications",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag_outlined),
+              label: "Jobs",
+            ),
+          ],
+          onTap: (index) => {
+            setState(() {
+              _currentIndex = index;
+            })
+          },
         ),
       ),
     );
   }
 }
-
