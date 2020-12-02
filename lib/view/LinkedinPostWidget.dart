@@ -4,13 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/model/Post.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LinkedinPostWidget extends StatelessWidget {
+class LinkedinPostWidget extends StatefulWidget {
   final Post post;
 
   const LinkedinPostWidget({
     this.post,
     Key key,
   }) : super(key: key);
+
+  @override
+  _LinkedinPostWidgetState createState() => _LinkedinPostWidgetState();
+}
+
+class _LinkedinPostWidgetState extends State<LinkedinPostWidget> {
+  String likesCount = "1";
+
+  void setLikesCountState(int newCount) {
+    setState(() {
+      likesCount = newCount.toString();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +33,12 @@ class LinkedinPostWidget extends StatelessWidget {
           color: Colors.white70,
           child: Column(
             children: [
-              PostHeaderView(post: post),
-              PostTextMessageView(post: post),
-              PostMainImageView(post: post),
-              LikesCountView(),
+              PostHeaderView(post: widget.post),
+              PostTextMessageView(post: widget.post),
+              PostMainImageView(post: widget.post),
+              LikesCountViewWidget(likesCount),
               PostLineDivider(),
-              BottomActionPostView(),
+              BottomActionPostView(setLikesCountState),
             ],
           ),
         ),
@@ -136,11 +149,16 @@ class PostHeaderView extends StatelessWidget {
   }
 }
 
-class LikesCountView extends StatelessWidget {
-  const LikesCountView({
-    Key key,
-  }) : super(key: key);
+class LikesCountViewWidget extends StatefulWidget {
+  final String likesCount;
 
+  LikesCountViewWidget(this.likesCount);
+
+  @override
+  _LikesCountViewWidgetState createState() => _LikesCountViewWidgetState();
+}
+
+class _LikesCountViewWidgetState extends State<LikesCountViewWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -157,7 +175,7 @@ class LikesCountView extends StatelessWidget {
               left: 3,
             ),
             child: Text(
-              "2",
+              widget.likesCount,
             ),
           )
         ],
@@ -184,11 +202,19 @@ class PostLineDivider extends StatelessWidget {
   }
 }
 
-class BottomActionPostView extends StatelessWidget {
-  const BottomActionPostView({
+class BottomActionPostView extends StatefulWidget {
+  final setLikesCountFunction;
+
+  const BottomActionPostView(
+    this.setLikesCountFunction, {
     Key key,
   }) : super(key: key);
 
+  @override
+  _BottomActionPostViewState createState() => _BottomActionPostViewState();
+}
+
+class _BottomActionPostViewState extends State<BottomActionPostView> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -197,22 +223,31 @@ class BottomActionPostView extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          BottomButton("Like", "like"),
-          BottomButton("Comment", "message"),
-          BottomButton("Share", "share"),
-          BottomButton("Send", "send"),
+          BottomButton("Like", "like", widget.setLikesCountFunction),
+          BottomButton("Comment", "message", widget.setLikesCountFunction),
+          BottomButton("Share", "share", widget.setLikesCountFunction),
+          BottomButton("Send", "send", widget.setLikesCountFunction),
         ],
       ),
     );
   }
 }
 
-class BottomButton extends StatelessWidget {
+class BottomButton extends StatefulWidget {
   final String _iconName;
   final String _iconData;
+  final setLikesCountFunction;
 
-  const BottomButton(this._iconName, this._iconData, {Key key})
+  const BottomButton(this._iconName, this._iconData, this.setLikesCountFunction,
+      {Key key})
       : super(key: key);
+
+  @override
+  _BottomButtonState createState() => _BottomButtonState();
+}
+
+class _BottomButtonState extends State<BottomButton> {
+  int count = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -220,16 +255,17 @@ class BottomButton extends StatelessWidget {
       children: [
         GestureDetector(
           child: SvgPicture.asset(
-            "assets/images/$_iconData.svg",
+            "assets/images/${widget._iconData}.svg",
             width: 20,
             height: 20,
           ),
           onTap: () {
-            log("assss");
+            widget.setLikesCountFunction(count++);
+            log("logger");
           },
         ),
         Text(
-          _iconName,
+          widget._iconName,
           style: TextStyle(
             color: Colors.black,
             fontFamily: "SourceSansPro",
