@@ -1,11 +1,14 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app/model/Post.dart';
 import 'package:flutter_app/view/BottomButtonWidget.dart';
+import 'package:flutter_app/view/CommentButtonWidget.dart';
 
 class BottomActionPostWidget extends StatefulWidget {
   final setLikesCountFunction;
+  final Post post;
 
   const BottomActionPostWidget(
-    this.setLikesCountFunction, {
+    this.setLikesCountFunction, this.post, {
     Key key,
   }) : super(key: key);
 
@@ -23,8 +26,7 @@ class _BottomActionPostWidgetState extends State<BottomActionPostWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           BottomButtonWidget("Like", "like", widget.setLikesCountFunction),
-          BottomButtonWidget(
-              "Comment", "message", widget.setLikesCountFunction),
+          CommentButtonWidget("Comment", "message", widget.post),
           BottomButtonWidget("Share", "share", widget.setLikesCountFunction),
           BottomButtonWidget("Send", "send", widget.setLikesCountFunction),
         ],

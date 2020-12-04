@@ -2,25 +2,25 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app/model/Post.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BottomButtonWidget extends StatefulWidget {
+import 'LinkedinPostWidget.dart';
+
+class CommentButtonWidget extends StatefulWidget {
   final String _iconName;
   final String _iconData;
-  final setLikesCountFunction;
+  final Post post;
 
-  const BottomButtonWidget(
-      this._iconName, this._iconData, this.setLikesCountFunction,
+  const CommentButtonWidget(this._iconName, this._iconData, this.post,
       {Key key})
       : super(key: key);
 
   @override
-  _BottomButtonWidgetState createState() => _BottomButtonWidgetState();
+  _CommentButtonWidgetState createState() => _CommentButtonWidgetState();
 }
 
-class _BottomButtonWidgetState extends State<BottomButtonWidget> {
-  int count = 1;
-
+class _CommentButtonWidgetState extends State<CommentButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,8 +43,9 @@ class _BottomButtonWidgetState extends State<BottomButtonWidget> {
             ],
           ),
           onTap: () {
-            widget.setLikesCountFunction(count++);
             log("logger");
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => CommentsWidget(post: widget.post)));
           },
         ),
       ],

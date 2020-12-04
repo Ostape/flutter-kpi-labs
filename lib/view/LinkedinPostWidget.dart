@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/Post.dart';
 import 'package:flutter_app/view/BottomActionPostWidget.dart';
@@ -20,7 +21,7 @@ class LinkedinPostWidget extends StatefulWidget {
 }
 
 class _LinkedinPostWidgetState extends State<LinkedinPostWidget> {
-  String likesCount = "1";
+  String likesCount = "";
 
   void setLikesCountState(int newCount) {
     setState(() {
@@ -41,11 +42,91 @@ class _LinkedinPostWidgetState extends State<LinkedinPostWidget> {
               PostMainImageWidget(post: widget.post),
               LikesCountViewWidget(likesCount),
               PostLineDividerWidget(),
-              BottomActionPostWidget(setLikesCountState),
+              BottomActionPostWidget(setLikesCountState, widget.post),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class CommentsWidget extends StatelessWidget {
+  final Post post;
+
+  const CommentsWidget({
+    Key key,
+    @required this.post,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: SingleChildScrollView(
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          children: [
+            LinkedinPostWidget(
+              post: post,
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Row(
+                children: [Text("Comments")],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              width: double.infinity,
+              color: Colors.red,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 35,
+                    height: 35,
+                    margin: EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(post.userAvatar),
+                        )),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.only(
+                          topRight: const Radius.circular(7),
+                          bottomRight: const Radius.circular(7),
+                          bottomLeft: const Radius.circular(7),
+                        )
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Orest Shemeliuk"),
+                          Text("Software Engineer"),
+                          Text("2w"),
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            child: Text("I am interest in it"),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
