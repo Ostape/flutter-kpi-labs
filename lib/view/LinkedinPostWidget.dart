@@ -1,5 +1,3 @@
-import 'dart:collection';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/Post.dart';
@@ -97,10 +95,8 @@ class CommentsWidget extends StatelessWidget {
                     color: Colors.grey[300],
                     thickness: 2,
                   ),
-                  itemBuilder: (_, index) => CommentWidget(
-                    post: post,
-                    comment: commentsList[index]
-                  ),
+                  itemBuilder: (_, index) =>
+                      CommentWidget(comment: commentsList[index]),
                 ),
               ),
             ],
@@ -120,10 +116,8 @@ class CommentsWidget extends StatelessWidget {
 }
 
 class CommentWidget extends StatelessWidget {
-  const CommentWidget({Key key, @required this.post, @required this.comment})
-      : super(key: key);
+  const CommentWidget({Key key, @required this.comment}) : super(key: key);
 
-  final Post post; // todo delete
   final String comment;
 
   @override
@@ -143,7 +137,8 @@ class CommentWidget extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: NetworkImage(post.userAvatar),
+                  image: NetworkImage(
+                      "https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"),
                 )),
           ),
           Expanded(
