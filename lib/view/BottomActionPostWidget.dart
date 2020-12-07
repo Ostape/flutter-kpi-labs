@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/model/Post.dart';
 import 'package:flutter_app/view/BottomButtonWidget.dart';
-import 'package:flutter_app/view/CommentButtonWidget.dart';
+import 'package:flutter_app/view/comments/CommentButtonWidget.dart';
 
 class BottomActionPostWidget extends StatefulWidget {
   final setLikesCountFunction;

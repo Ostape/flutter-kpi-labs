@@ -7,7 +7,6 @@ import 'package:flutter_app/view/comments/CommentsPageWidget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import 'LinkedinPostWidget.dart';
 
 class CommentButtonWidget extends StatefulWidget {
   final String _iconName;

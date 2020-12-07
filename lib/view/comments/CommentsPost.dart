@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/model/Post.dart';
-import 'package:flutter_app/view/CommentWidget.dart';
+import 'file:///D:/Orest%60s%20data/KPI/FlutterApplications/flutter_app/lib/view/comments/CommentWidget.dart';
 import 'package:flutter_app/view/LinkedinPostWidget.dart';
 import 'package:provider/provider.dart';
 
