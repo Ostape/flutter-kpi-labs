@@ -51,7 +51,7 @@ class _LinkedinPostWidgetState extends State<LinkedinPostWidget> {
   }
 }
 
-class CommentsWidget extends StatelessWidget {
+class CommentsPageWidget extends StatelessWidget {
   final Post post;
 
   final List<String> commentsList = [
@@ -60,7 +60,7 @@ class CommentsWidget extends StatelessWidget {
     "Some comment3",
   ];
 
-  CommentsWidget({
+  CommentsPageWidget({
     Key key,
     @required this.post,
   }) : super(key: key);

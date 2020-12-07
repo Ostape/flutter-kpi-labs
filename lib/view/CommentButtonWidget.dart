@@ -45,7 +45,7 @@ class _CommentButtonWidgetState extends State<CommentButtonWidget> {
           onTap: () {
             log("logger");
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => CommentsWidget(post: widget.post)));
+                builder: (context) => CommentsPageWidget(post: widget.post)));
           },
         ),
       ],
