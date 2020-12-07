@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/model/Post.dart';
+import 'package:flutter_app/view/comments/CommentsPageWidget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import 'LinkedinPostWidget.dart';
 
@@ -45,7 +47,11 @@ class _CommentButtonWidgetState extends State<CommentButtonWidget> {
           onTap: () {
             log("logger");
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => CommentsPageWidget(post: widget.post)));
+              builder: (context) => ChangeNotifierProvider.value(
+                value: widget.post,
+                child: CommentsPageWidget(post: widget.post),
+              ),
+            ));
           },
         ),
       ],
