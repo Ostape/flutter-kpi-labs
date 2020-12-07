@@ -1,4 +1,5 @@
-  import 'package:flutter/gestures.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/Post.dart';
 import 'package:flutter_app/view/BottomActionPostWidget.dart';
@@ -63,12 +64,12 @@ class CommentsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second Route"),
+        title: Text("Comments"),
       ),
       body: SingleChildScrollView(
         clipBehavior: Clip.antiAlias,
         child: Container(
-          margin: EdgeInsets.only(bottom: 20),
+          margin: EdgeInsets.only(bottom: 60),
           child: Column(
             children: [
               LinkedinPostWidget(
@@ -88,7 +89,14 @@ class CommentsWidget extends StatelessWidget {
           ),
         ),
       ),
-      bottomSheet: Text("SOME TEXT"),
+      bottomSheet: TextFormField(
+        decoration: InputDecoration(
+          hintText: "Comment post",
+          border: new OutlineInputBorder(
+            borderSide: new BorderSide(),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -125,13 +133,12 @@ class CommentWidget extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.only(
-                  topRight: const Radius.circular(7),
-                  bottomRight: const Radius.circular(7),
-                  bottomLeft: const Radius.circular(7),
-                )
-              ),
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.only(
+                    topRight: const Radius.circular(7),
+                    bottomRight: const Radius.circular(7),
+                    bottomLeft: const Radius.circular(7),
+                  )),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
