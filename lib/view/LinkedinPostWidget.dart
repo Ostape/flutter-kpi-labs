@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -55,7 +56,13 @@ class _LinkedinPostWidgetState extends State<LinkedinPostWidget> {
 class CommentsWidget extends StatelessWidget {
   final Post post;
 
-  const CommentsWidget({
+  final List<String> commentsList = [
+    "Some comment1",
+    "Some comment2",
+    "Some comment3",
+  ];
+
+  CommentsWidget({
     Key key,
     @required this.post,
   }) : super(key: key);
@@ -81,21 +88,20 @@ class CommentsWidget extends StatelessWidget {
                   children: [Text("Comments")],
                 ),
               ),
-              CommentWidget(
-                post: post,
-                comment: "I am in it",
-              ),
-              CommentWidget(
-                post: post,
-                comment: "I am interest in it",
-              ),
-              CommentWidget(
-                post: post,
-                comment: "I am interest in it",
-              ),
-              CommentWidget(
-                post: post,
-                comment: "I am interest in it",
+              Container(
+                height: 600,
+                child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: commentsList.length,
+                  separatorBuilder: (_, index) => Divider(
+                    color: Colors.grey[300],
+                    thickness: 2,
+                  ),
+                  itemBuilder: (_, index) => CommentWidget(
+                    post: post,
+                    comment: commentsList[index]
+                  ),
+                ),
               ),
             ],
           ),
@@ -117,7 +123,7 @@ class CommentWidget extends StatelessWidget {
   const CommentWidget({Key key, @required this.post, @required this.comment})
       : super(key: key);
 
-  final Post post;
+  final Post post; // todo delete
   final String comment;
 
   @override
@@ -125,7 +131,7 @@ class CommentWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10),
       width: double.infinity,
-      color: Colors.red,
+      color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
