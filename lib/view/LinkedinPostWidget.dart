@@ -81,10 +81,22 @@ class CommentsWidget extends StatelessWidget {
                   children: [Text("Comments")],
                 ),
               ),
-              CommentWidget(post: post),
-              CommentWidget(post: post),
-              CommentWidget(post: post),
-              CommentWidget(post: post),
+              CommentWidget(
+                post: post,
+                comment: "I am in it",
+              ),
+              CommentWidget(
+                post: post,
+                comment: "I am interest in it",
+              ),
+              CommentWidget(
+                post: post,
+                comment: "I am interest in it",
+              ),
+              CommentWidget(
+                post: post,
+                comment: "I am interest in it",
+              ),
             ],
           ),
         ),
@@ -102,12 +114,11 @@ class CommentsWidget extends StatelessWidget {
 }
 
 class CommentWidget extends StatelessWidget {
-  const CommentWidget({
-    Key key,
-    @required this.post,
-  }) : super(key: key);
+  const CommentWidget({Key key, @required this.post, @required this.comment})
+      : super(key: key);
 
   final Post post;
+  final String comment;
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +158,9 @@ class CommentWidget extends StatelessWidget {
                   Text("2w"),
                   Container(
                     margin: EdgeInsets.only(top: 10),
-                    child: Text("I am interest in it"),
+                    child: Text(
+                      comment,
+                    ),
                   ),
                 ],
               ),
