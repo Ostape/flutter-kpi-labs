@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -36,7 +38,7 @@ class _JsonDataShowWidgetState extends State<JsonDataShowWidget> {
               children: [
                 Container(
                     margin: EdgeInsets.all(10),
-                    child: Text(snapshot.data?.userId?.toString() ?? "")),
+                    child: Text(snapshot.data?.name?.toString() ?? "")),
                 Container(
                     margin: EdgeInsets.all(10),
                     child: Text(snapshot.data?.phone ?? "")),
@@ -62,11 +64,23 @@ Future<Teacher> fetchAlbum() async {
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
     // then parse the JSON.
-    log(response.body.toString());
-    return Teacher.fromJson(jsonDecode(response.body));
+    // var decodedJson = json.decode(utf8.decode(response.bodyBytes));
+    log(json.decode(utf8.decode(response.bodyBytes)).toString());
+    return Teacher.fromJson(json.decode(utf8.decode(response.bodyBytes)));
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
     throw Exception('Failed to load album');
   }
 }
+
+// Future<String> readResponse(http.Response response) {
+
+
+  // final completer = Completer<String>();
+  // final contents = StringBuffer();
+  // response.transform(utf8.decoder).listen((data) {
+  //   contents.write(data);
+  // }, onDone: () => completer.complete(contents.toString()));
+  // return completer.future;
+// }
