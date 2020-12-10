@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/model/Post.dart';
 import 'package:flutter_app/view/LinkedinPostWidget.dart';
+import 'package:flutter_app/view/settings/SettingsWidget.dart';
 
 void main() {
   runApp(MyApp());
@@ -109,9 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Center(
       child: Text("Notifications"),
     ),
-    Center(
-      child: Text("Jobs"),
-    ),
+    SettingsWidget(),
   ];
 
   @override
