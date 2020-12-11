@@ -7,7 +7,6 @@ import 'package:flutter_app/view/comments/CommentsPageWidget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-
 class CommentButtonWidget extends StatefulWidget {
   final String _iconName;
   final String _iconData;
@@ -45,15 +44,19 @@ class _CommentButtonWidgetState extends State<CommentButtonWidget> {
           ),
           onTap: () {
             log("logger");
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => ChangeNotifierProvider.value(
-                value: widget.post,
-                child: CommentsPageWidget(post: widget.post),
-              ),
-            ));
+            _openCommentsScreen();
           },
         ),
       ],
     );
+  }
+
+  _openCommentsScreen() {
+     Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ChangeNotifierProvider.value(
+        value: widget.post,
+        child: CommentsPageWidget(post: widget.post),
+      ),
+    ));
   }
 }

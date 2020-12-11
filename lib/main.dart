@@ -17,7 +17,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Orest Shemeliuk TI-72'),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(title: 'Orest Shemeliuk TI-72'),
+        '/routingScreen': (context) => RoutingScreen(),
+      },
     );
   }
 }
@@ -101,9 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
         post: posts[index],
       ),
     ),
-    Center(
-      child: Text("My Network"),
-    ),
+    NavigationExample(),
     Center(
       child: Text("Post"),
     ),
@@ -163,6 +165,111 @@ class _MyHomePageState extends State<MyHomePage> {
               _currentIndex = index;
             })
           },
+        ),
+      ),
+    );
+  }
+}
+
+class NavigationExample extends StatelessWidget {
+  const NavigationExample({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          SizedBox(height: 30),
+          RaisedButton(
+            color: Colors.amberAccent[100],
+            onPressed: () {
+              _showSnackBarWithReturnedTextFromNavigator(context);
+            },
+            child: Text(
+              'Navigator nav',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          SizedBox(height: 30),
+          RaisedButton(
+            color: Colors.green[500],
+            onPressed: () {
+              Navigator.pushNamed(context, '/routingScreen',
+                  arguments: "Passed arguments");
+            },
+            child: Text('Routing nav', style: TextStyle(fontSize: 20)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _showSnackBarWithReturnedTextFromNavigator(BuildContext context) async {
+    var result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => NavigatorScreen()),
+    );
+
+    Scaffold.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text("$result")));
+  }
+}
+
+class NavigatorScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Navigator Screen'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, 'return text!');
+                },
+                child: Text('Back to Previos Screen!'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class RoutingScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final String args = ModalRoute.of(context).settings.arguments;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Routing Screen'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(height: 30),
+            Text(args),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Back to Previos Screen!'),
+              ),
+            ),
+          ],
         ),
       ),
     );
